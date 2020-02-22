@@ -2,30 +2,57 @@ import * as Yup from "yup";
 import Book from "../models/Book";
 
 class BookController {
-  async store(req, res) {
+  async update(req, res) {
+    // Only the stock should be able to be updated due to rents
     const schema = Yup.object().shape({
-      name: Yup.string().required(),
-      description: Yup.string().required(),
-      stock: Yup.number().required(),
-      img_url: Yup.string()
+      stock: Yup.number().required()
     });
-
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: "Validation fails" });
     }
 
-    const { name } = req.body;
+    const { id } = req.params;
+    const { stock } = req.body;
 
-    const bookExists = await Book.findOne({ where: { name } });
-    console.log(bookExists);
-    if (bookExists) {
-      const { stock } = bookExists;
-      await bookExists.update({ stock: stock + 1 });
-      return res.json(bookExists);
+    const book = await Book.findByPk(id);
+
+    if (!book) {
+      return res.status(400).json({ error: "Book does not exist" });
     }
 
-    const newBook = await Book.create(req.body);
-    return res.json(newBook);
+    if (stock < 0) {
+      return res
+        .status(400)
+        .json({ error: "Book Stock should not be negative" });
+    }
+
+    const newBook = await book.update({ stock });
+
+    return res.status(200).json(newBook);
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const book = await Book.findByPk(id);
+
+    if (!book) {
+      return res.status(400).json({ error: "Book does not exist" });
+    }
+
+    return res.json(await book.destroy());
+  }
+
+  async index(req, res) {
+    const { id } = req.params;
+
+    const book = await Book.findByPk(id);
+
+    if (!book) {
+      return res.status(400).json({ error: "Book does not exist" });
+    }
+
+    return res.json(book);
   }
 }
 
