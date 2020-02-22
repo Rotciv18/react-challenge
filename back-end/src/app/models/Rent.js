@@ -6,10 +6,15 @@ class Rent extends Model {
       {
         devolution_date: Sequelize.DATE
       },
-      sequelize
+      { sequelize }
     );
 
     return this;
+  }
+
+  static associate(models) {
+    this.belongsTo(models.User, { foreignKey: "user_id", as: "user" });
+    this.belongsTo(models.Book, { foreignKey: "book_id", as: "book" });
   }
 }
 

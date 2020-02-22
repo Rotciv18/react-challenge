@@ -3,6 +3,7 @@ import UserController from "./app/controllers/UserController";
 import SessionController from "./app/controllers/SessionController";
 import BooksController from "./app/controllers/BooksController";
 import BookController from "./app/controllers/BookController";
+import RentController from "./app/controllers/RentController";
 
 import authMiddleware from "./app/middlewares/auth";
 import adminAuthMiddleware from "./app/middlewares/adminAuth";
@@ -24,6 +25,8 @@ routes.get("/books", BooksController.index);
 
 routes.get("/books/:id", BookController.index);
 routes.put("/books/:id", BookController.update);
+
+routes.post("/rent/:bookId", RentController.store);
 
 routes.use(adminAuthMiddleware);
 
