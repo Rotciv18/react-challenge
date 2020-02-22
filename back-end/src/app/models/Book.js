@@ -7,7 +7,8 @@ class Book extends Model {
         name: Sequelize.STRING,
         description: Sequelize.STRING,
         stock: Sequelize.INTEGER,
-        img_url: Sequelize.STRING
+        img_url: Sequelize.STRING,
+        price: Sequelize.FLOAT
       },
       { sequelize }
     );

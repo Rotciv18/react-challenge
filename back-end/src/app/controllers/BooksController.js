@@ -7,6 +7,7 @@ class BooksController {
       name: Yup.string().required(),
       description: Yup.string().required(),
       stock: Yup.number().required(),
+      price: Yup.number().required(),
       img_url: Yup.string()
     });
 
