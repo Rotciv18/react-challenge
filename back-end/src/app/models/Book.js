@@ -12,6 +12,12 @@ class Book extends Model {
       { sequelize }
     );
 
+    this.addHook("beforeSave", async book => {
+      if (!book.img_url) {
+        book.img_url = "unavailable";
+      }
+    });
+
     return this;
   }
 }
