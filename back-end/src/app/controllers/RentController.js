@@ -40,7 +40,8 @@ class RentController {
       where: { book_id: book.id }
     });
 
-    if (reservations) {
+    if (reservations.length > 0) {
+      console.log(reservations);
       let reservation;
       if (reservations.length > 1) {
         reservation = reservations.reduce((earliestReserv, reserv) => {
@@ -58,7 +59,7 @@ class RentController {
         user_id: reservation.user_id,
         book_id: book.id
       });
-      console.log(reservation);
+
       return res.json(await reservation.destroy());
     }
 

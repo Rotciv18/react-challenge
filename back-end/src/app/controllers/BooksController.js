@@ -19,8 +19,10 @@ class BooksController {
 
     const bookExists = await Book.findOne({ where: { name } });
     if (bookExists) {
-      const { stock } = bookExists;
-      await bookExists.update({ stock: stock + 1 });
+      const remainingStock = bookExists.stock;
+      const additionalStock = req.body.stock + remainingStock;
+
+      await bookExists.update({ stock: additionalStock });
       return res.json(bookExists);
     }
 
