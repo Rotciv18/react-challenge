@@ -41,7 +41,6 @@ class RentController {
     });
 
     if (reservations.length > 0) {
-      console.log(reservations);
       let reservation;
       if (reservations.length > 1) {
         reservation = reservations.reduce((earliestReserv, reserv) => {
