@@ -1,46 +1,43 @@
-import { addDays, endOfToday } from "date-fns";
-
 import Rent from "../models/Rent";
 import Book from "../models/Book";
+import User from "../models/User";
 
 class RentController {
-  async store(req, res) {
-    const { bookId } = req.params;
-    const { userId } = req;
-
-    const book = await Book.findByPk(bookId);
-    if (!book) {
-      return res.status(400).json({ error: "Book not found" });
-    }
-
-    const { stock } = book;
-    if (stock < 1) {
-      return res.status(400).json({ error: "Book is not available" });
-    }
+  async index(req, res) {
+    const { rentId } = req.params;
 
     const rent = await Rent.findOne({
-      where: {
-        user_id: userId,
-        book_id: bookId
-      }
+      where: { id: rentId },
+      include: [
+        { model: User, as: "user", attributes: ["name", "email"] },
+        {
+          model: Book,
+          as: "book",
+          attributes: ["id", "name", "price", "img_url"]
+        }
+      ]
     });
-    if (rent) {
-      return res
-        .status(400)
-        .json({ error: "User's already renting this book" });
+    if (!rent) {
+      return res.status(400).json({ error: "Rent not found" });
     }
 
-    book.update({ stock: stock - 1 });
+    return res.json(rent);
+  }
 
-    const devolutionDate = addDays(endOfToday(), 7);
+  async delete(req, res) {
+    const { rentId } = req.params;
 
-    const newRent = await Rent.create({
-      devolution_date: devolutionDate,
-      user_id: userId,
-      book_id: bookId
-    });
+    const rent = await Rent.findByPk(rentId);
+    if (!rent) {
+      return res.status(400).json({ error: "Rent not found" });
+    }
 
-    return res.json(newRent);
+    const book = await Book.findByPk(rent.book_id);
+
+    const { stock } = book;
+    await book.update({ stock: stock + 1 });
+
+    return res.json(await rent.destroy());
   }
 }
 

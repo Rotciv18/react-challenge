@@ -4,6 +4,8 @@ import SessionController from "./app/controllers/SessionController";
 import BooksController from "./app/controllers/BooksController";
 import BookController from "./app/controllers/BookController";
 import RentController from "./app/controllers/RentController";
+import RentsController from "./app/controllers/RentsController";
+import UserRentController from "./app/controllers/UserRentController";
 
 import authMiddleware from "./app/middlewares/auth";
 import adminAuthMiddleware from "./app/middlewares/adminAuth";
@@ -26,11 +28,17 @@ routes.get("/books", BooksController.index);
 routes.get("/books/:id", BookController.index);
 routes.put("/books/:id", BookController.update);
 
-routes.post("/rent/:bookId", RentController.store);
+routes.post("/rent/:bookId", UserRentController.store);
+routes.get("/rent/:rentId", RentController.index);
 
 routes.use(adminAuthMiddleware);
 
 routes.post("/books", BooksController.store);
+
 routes.delete("/books/:id", BookController.delete);
+
+routes.get("/rent", RentsController.index);
+
+routes.delete("/rent/:rentId", RentController.delete);
 
 export default routes;
