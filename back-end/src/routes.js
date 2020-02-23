@@ -6,6 +6,7 @@ import BookController from "./app/controllers/BookController";
 import RentController from "./app/controllers/RentController";
 import RentsController from "./app/controllers/RentsController";
 import UserRentController from "./app/controllers/UserRentController";
+import ReservationController from "./app/controllers/ReservationController";
 
 import authMiddleware from "./app/middlewares/auth";
 import adminAuthMiddleware from "./app/middlewares/adminAuth";
@@ -30,6 +31,11 @@ routes.put("/books/:id", BookController.update);
 
 routes.post("/rent/:bookId", UserRentController.store);
 routes.get("/rent/:rentId", RentController.index);
+routes.delete("/rent/:rentId", RentController.delete);
+
+routes.post("/reservation/:bookId", ReservationController.store);
+routes.delete("/reservation/:reservationId", ReservationController.delete);
+routes.get("reservation", ReservationController.index);
 
 routes.use(adminAuthMiddleware);
 
@@ -38,7 +44,5 @@ routes.post("/books", BooksController.store);
 routes.delete("/books/:id", BookController.delete);
 
 routes.get("/rent", RentsController.index);
-
-routes.delete("/rent/:rentId", RentController.delete);
 
 export default routes;
