@@ -17,14 +17,12 @@ class Rents extends Component {
 
   render() {
     const { rents } = this.props;
-    const books = rents.map((rent) => rent.book);
 
     return (
       <Container>
-        <button type="button" onClick={() => console.log(books)}>rents</button>
         <h1>My Rents</h1>
-        {books && (
-          <BookListContainer books={books} />
+        {rents && (
+          <BookListContainer rents={rents} rentPage />
         )}
       </Container>
     );

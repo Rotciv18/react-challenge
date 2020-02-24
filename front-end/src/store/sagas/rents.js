@@ -23,6 +23,7 @@ function* removeRent(action) {
   try {
     yield call(api.delete, `rent/${rentId}`, { headers });
     yield put(RentActions.removeRentSuccess());
+    history.push('main');
   } catch (e) {}
 }
 

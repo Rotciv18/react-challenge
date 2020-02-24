@@ -8,9 +8,16 @@ export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  text-align: center;
 
 
   div {
     margin: 12px 0 0 12px;
+  }
+
+  .rentsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 `;
