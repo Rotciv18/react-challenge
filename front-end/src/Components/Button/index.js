@@ -5,6 +5,8 @@ export default styled.button`
   width: 90px;
   height: 40px;
   cursor: pointer;
+  font-weight: bold;
+  text-decoration-line: none;
 
   display: flex;
   justify-content: center;

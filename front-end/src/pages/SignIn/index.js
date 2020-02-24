@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import { Link } from 'react-router-dom';
+import { Creators as AuthActions } from '../../store/ducks/auth';
+
 import { Container, SignInContainer, SubmitContainer } from '../../styles/signStyle';
 import Button from '../../Components/Button';
 
@@ -15,6 +21,14 @@ class SignIn extends Component {
     });
   }
 
+  handleSignIn = () => {
+    const { email, password } = this.state;
+    const { signInRequest } = this.props;
+    console.log('oi');
+
+    signInRequest({ email, password });
+  }
+
   render() {
     const { email, password } = this.state;
     return (
@@ -28,7 +42,7 @@ class SignIn extends Component {
           <input type="password" name="password" onChange={this.handleInputChange} value={password} />
 
           <SubmitContainer>
-            <Button type="submit">SignIn</Button>
+            <Button onClick={this.handleSignIn}>SignIn</Button>
             <Link to="/signup">
               <Button>SignUp</Button>
             </Link>
@@ -40,4 +54,6 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+const mapDispatchToProps = (dispatch) => bindActionCreators(AuthActions, dispatch);
+
+export default connect(null, mapDispatchToProps)(SignIn);
