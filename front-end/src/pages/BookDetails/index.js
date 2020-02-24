@@ -6,16 +6,22 @@ import { bindActionCreators } from 'redux';
 import Button from '../../Components/Button';
 
 import { Creators as RentActions } from '../../store/ducks/rents';
+import { Creators as ReservationActions } from '../../store/ducks/reservation';
 
 
 import { Container } from './styles';
 
-function BookDetails({ book, addRentRequest, authToken }) {
+function BookDetails({
+  book, addRentRequest, authToken, addReservationRequest,
+}) {
   const bookActionType = book.stock === 0 ? 'Reserve' : 'Rent';
 
   function handleClick() {
     if (bookActionType === 'Rent') {
       addRentRequest(book.id, authToken);
+    }
+    if (bookActionType === 'Reserve') {
+      addReservationRequest(book.id, authToken);
     }
   }
 
@@ -30,7 +36,10 @@ function BookDetails({ book, addRentRequest, authToken }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(RentActions, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  ...RentActions,
+  ...ReservationActions,
+}, dispatch);
 
 const mapStateToProps = (state) => ({
   book: state.books.selectedBook,
