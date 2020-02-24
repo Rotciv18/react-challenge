@@ -30,7 +30,7 @@ routes.get("/books/:id", BookController.index);
 routes.put("/books/:id", BookController.update);
 
 routes.post("/rent/:bookId", UserRentController.store);
-routes.get("/rent", UserController.index);
+routes.get("/rent", UserRentController.index);
 routes.get("/rent/:rentId", RentController.index);
 routes.delete("/rent/:rentId", RentController.delete);
 

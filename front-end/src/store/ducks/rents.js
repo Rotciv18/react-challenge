@@ -10,7 +10,7 @@ export const { Types, Creators } = createActions({
 });
 
 const INITIAL_STATE = {
-  rents: [],
+  data: [],
 };
 
 
@@ -36,9 +36,8 @@ const getRentsRequest = (state = INITIAL_STATE) => ({
 
 const getRentsSuccess = (state = INITIAL_STATE, action) => ({
   ...state,
-  rents: [
-    ...state.rents,
-    action.data,
+  data: [
+    ...action.data,
   ],
 });
 

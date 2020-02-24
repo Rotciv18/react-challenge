@@ -6,7 +6,6 @@ export default styled.button`
   height: 40px;
   cursor: pointer;
   font-weight: bold;
-  text-decoration-line: none;
 
   display: flex;
   justify-content: center;

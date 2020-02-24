@@ -33,7 +33,9 @@ function* getRents(action) {
   try {
     const response = yield call(api.get, 'rent', { headers });
     yield put(RentActions.getRentsSuccess(response.data));
-  } catch (e) {}
+  } catch (e) {
+    console.log(e.response);
+  }
 }
 
 export default function* () {
