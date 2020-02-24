@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
+import history from '../../services/history';
 import { Creators as AuthActions } from '../../store/ducks/auth';
 
 import { Container, SignInContainer, SubmitContainer } from '../../styles/signStyle';
@@ -13,6 +14,17 @@ class SignIn extends Component {
   state = {
     email: '',
     password: '',
+  }
+
+  componentDidMount() {
+    const { auth } = this.props;
+    console.log(auth);
+
+    { if (auth) {
+      if (auth.signed) {
+        history.push('/main');
+      }
+    } }
   }
 
   handleInputChange = (e) => {
@@ -54,6 +66,10 @@ class SignIn extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
 const mapDispatchToProps = (dispatch) => bindActionCreators(AuthActions, dispatch);
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

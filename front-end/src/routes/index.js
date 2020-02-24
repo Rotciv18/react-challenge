@@ -4,11 +4,13 @@ import React from 'react';
 
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import Main from '../pages/Main';
 
 const Routes = () => (
   <Switch>
-    <Route path="/signup" component={SignUp} />
     <Route exact path="/" component={SignIn} />
+    <Route path="/signup" component={SignUp} />
+    <Route path="/main" component={Main} />
   </Switch>
 );
 
