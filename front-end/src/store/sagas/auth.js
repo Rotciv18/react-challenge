@@ -20,6 +20,7 @@ function* signIn(action) {
     const response = yield call(api.post, 'sessions', action.data);
 
     yield put(AuthActions.signInSuccess(response.data));
+    history.push('/main');
   } catch (e) {
 
   }

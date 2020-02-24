@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Creators as BookActions } from '../../store/ducks/books';
 
 import BookListContainer from '../../Components/BookListContainer';
+import { Container } from './styles';
 
 class Main extends Component {
   state ={
@@ -21,11 +22,12 @@ class Main extends Component {
   render() {
     const { books } = this.props;
     return (
-      <>
-        {books && (
+      <Container>
+        <h1>Books</h1>
+        {books.bookList && (
           <BookListContainer books={books.bookList} />
         )}
-      </>
+      </Container>
     );
   }
 }

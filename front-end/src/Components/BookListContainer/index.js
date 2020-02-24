@@ -7,7 +7,7 @@ export default function BookListContainer({ books }) {
   return (
     <Container>
       {books.map((book) => (
-        <Book />
+        <Book key={book.id} book={book} />
       ))}
     </Container>
   );
