@@ -1,33 +1,43 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { Creators as BookActions } from '../../store/ducks/books';
+
 import BookListContainer from '../../Components/BookListContainer';
-import Book from '../../Components/Book';
 
 class Main extends Component {
-  state ={}
+  state ={
+  }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  componentDidMount() {
+    const { getBooksRequest, auth } = this.props;
 
+    getBooksRequest(auth.token);
   }
 
   render() {
+    const { books } = this.props;
     return (
-      <BookListContainer />
+      <>
+        {books && (
+          <BookListContainer books={books.bookList} />
+        )}
+      </>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-
+  books: state.books,
+  auth: state.auth,
 });
 
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators(Actions, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators(BookActions, dispatch);
 
 export default connect(
   mapStateToProps,
-  // mapDispatchToProps
+  mapDispatchToProps,
 )(Main);

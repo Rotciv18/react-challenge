@@ -3,13 +3,13 @@ import api from '../../services/api';
 
 import { Types as BookTypes, Creators as BookActions } from '../ducks/books';
 
-function* getBooks() {
+function* getBooks(action) {
   try {
-    const response = yield api.call(api.get, 'books');
+    const headers = { Authorization: `Bearer ${action.authToken}` };
+    const response = yield api.call(api.get, 'books', { headers });
 
     yield put(BookActions.getBooksSuccess(response.data));
   } catch (e) {
-
   }
 }
 
@@ -17,11 +17,11 @@ function* getBook(action) {
   const { id } = action;
 
   try {
-    const response = yield api.call(api.get, `books/${id}`);
+    const headers = { Authorization: `Bearer ${action.authToken}` };
+    const response = yield api.call(api.get, `books/${id}`, { headers });
 
     yield put(BookActions.getBookSuccess(response.data));
   } catch (e) {
-
   }
 }
 

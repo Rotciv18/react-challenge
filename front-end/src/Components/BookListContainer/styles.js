@@ -7,4 +7,8 @@ export const Container = styled.div`
   padding: 12px;
 
   display: flex;
+
+  div + div {
+    margin-left: 12px;
+  }
 `;

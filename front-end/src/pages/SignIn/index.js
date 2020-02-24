@@ -36,7 +36,6 @@ class SignIn extends Component {
   handleSignIn = () => {
     const { email, password } = this.state;
     const { signInRequest } = this.props;
-    console.log('oi');
 
     signInRequest({ email, password });
   }

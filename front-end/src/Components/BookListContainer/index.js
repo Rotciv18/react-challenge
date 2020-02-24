@@ -6,7 +6,9 @@ import { Container } from './styles';
 export default function BookListContainer({ books }) {
   return (
     <Container>
-      <Book />
+      {books.map((book) => (
+        <Book />
+      ))}
     </Container>
   );
 }

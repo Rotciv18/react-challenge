@@ -1,14 +1,15 @@
 import { createActions, createReducer } from 'reduxsauce';
 
 export const { Types, Creators } = createActions({
-  getBooksRequest: [''],
+  getBooksRequest: ['authToken'],
   getBooksSuccess: ['data'],
-  getBookRequest: ['id'],
+  getBookRequest: ['id', 'authToken'],
   getBookSuccess: ['data'],
 });
 
 const INITIAL_STATE = {
-  data: {},
+  bookList: [],
+  selectedBook: {},
   loading: false,
 };
 
@@ -18,7 +19,10 @@ const getBooksRequest = (state = INITIAL_STATE) => ({
 });
 
 const getBooksSuccess = (state = INITIAL_STATE, action) => ({
-
+  ...state,
+  bookList: [
+    ...action.data,
+  ],
 });
 
 const getBookRequest = (state = INITIAL_STATE) => ({
@@ -27,7 +31,10 @@ const getBookRequest = (state = INITIAL_STATE) => ({
 });
 
 const getBookSuccess = (state = INITIAL_STATE, action) => ({
-
+  ...state,
+  selectedBook: {
+    ...action.data,
+  },
 });
 
 export default createReducer(INITIAL_STATE, {
