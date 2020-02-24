@@ -6,12 +6,14 @@ import { Types as RentTypes, Creators as RentActions } from '../ducks/rents';
 
 function* addRent(action) {
   const { bookId, authToken } = action;
-  const headers = { Authorization: `Bearer ${authToken}` };
+  const headers = { authorization: `Bearer ${authToken}` };
 
   try {
-    yield call(api.post, `rent/${bookId}`, { headers });
-    yield put(RentActions.addRentSuccess);
-  } catch (e) {}
+    yield call(api.post, `rent/${bookId}`, {}, { headers });
+    yield put(RentActions.addRentSuccess());
+    history.push('main');
+  } catch (e) {
+  }
 }
 
 function* removeRent(action) {
@@ -20,7 +22,7 @@ function* removeRent(action) {
 
   try {
     yield call(api.delete, `rent/${rentId}`, { headers });
-    yield put(RentActions.removeRentSuccess);
+    yield put(RentActions.removeRentSuccess());
   } catch (e) {}
 }
 

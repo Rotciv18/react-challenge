@@ -18,7 +18,7 @@ const addRentRequest = (state = INITIAL_STATE) => ({
   ...state,
 });
 
-const addRentSuccess = (state = INITIAL_STATE, action) => ({
+const addRentSuccess = (state = INITIAL_STATE) => ({
   ...state,
 });
 
