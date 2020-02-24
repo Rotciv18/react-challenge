@@ -13,4 +13,8 @@ export const Container = styled.div`
     font-family: Roboto;
     font-style: italic;
   }
+
+  img {
+    height: 500px;
+  }
 `;

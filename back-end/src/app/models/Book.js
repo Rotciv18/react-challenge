@@ -15,7 +15,8 @@ class Book extends Model {
 
     this.addHook("beforeSave", async book => {
       if (!book.img_url) {
-        book.img_url = "unavailable";
+        book.img_url =
+          "https://image.shutterstock.com/image-vector/link-unavailable-icon-website-suitable-600w-1110144383.jpg";
       }
     });
 

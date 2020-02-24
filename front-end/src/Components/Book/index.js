@@ -15,10 +15,9 @@ function Book({ book, selectBook }) {
     history.push('/book');
   }
 
-  const imgUrl = book.img_url === 'unavailable' ? 'https://image.shutterstock.com/image-vector/link-unavailable-icon-website-suitable-600w-1110144383.jpg' : book.img_url;
   return (
     <Container onClick={() => handleBookClick(book)}>
-      <img src={imgUrl} alt="" />
+      <img src={book.img_url} alt="" />
       <h4>{book.name}</h4>
       <span>{book.stock}</span>
     </Container>
