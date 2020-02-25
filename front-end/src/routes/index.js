@@ -8,6 +8,7 @@ import Main from '../pages/Main';
 import BookDetails from '../pages/BookDetails';
 import Rents from '../pages/Rents';
 import Reservations from '../pages/Reservations';
+import AddBooks from '../pages/AddBooks';
 
 const Routes = () => (
   <Switch>
@@ -17,6 +18,7 @@ const Routes = () => (
     <Route path="/book" component={BookDetails} />
     <Route path="/rents" component={Rents} />
     <Route path="/reservations" component={Reservations} />
+    <Route path="/addBooks" component={AddBooks} />
   </Switch>
 );
 

@@ -5,6 +5,7 @@ export const { Types, Creators } = createActions({
   signUpSuccess: [''],
   signInRequest: ['data'],
   signInSuccess: ['data'],
+  signOut: [''],
 });
 
 const INITIAL_STATE = {
@@ -12,6 +13,7 @@ const INITIAL_STATE = {
   token: null,
   signed: false,
   userId: '',
+  admin: false,
 };
 
 const signUpRequest = (state = INITIAL_STATE) => ({
@@ -35,6 +37,11 @@ const signInSuccess = (state = INITIAL_STATE, action) => ({
   token: action.data.token,
   userId: action.data.user.id,
   signed: true,
+  admin: action.data.user.admin,
+});
+
+const signOut = (state = INITIAL_STATE) => ({
+  INITIAL_STATE,
 });
 
 export default createReducer(INITIAL_STATE, {
@@ -42,4 +49,5 @@ export default createReducer(INITIAL_STATE, {
   [Types.SIGN_UP_SUCCESS]: signUpSuccess,
   [Types.SIGN_IN_REQUEST]: signInRequest,
   [Types.SIGN_IN_SUCCESS]: signInSuccess,
+  [Types.SIGN_OUT]: signOut,
 });
