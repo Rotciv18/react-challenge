@@ -6,6 +6,8 @@ export const { Types, Creators } = createActions({
   getBookRequest: ['id', 'authToken'],
   getBookSuccess: ['data'],
   selectBook: ['data'],
+  addBookRequest: ['data', 'authToken'],
+  addBookSuccess: [''],
 });
 
 const INITIAL_STATE = {
@@ -45,10 +47,20 @@ const selectBook = (state = INITIAL_STATE, action) => ({
   },
 });
 
+const addBookRequest = () => ({
+  // Handled on saga
+});
+
+const addBookSuccess = () => ({
+  // ~
+});
+
 export default createReducer(INITIAL_STATE, {
   [Types.GET_BOOKS_REQUEST]: getBooksRequest,
   [Types.GET_BOOKS_SUCCESS]: getBooksSuccess,
   [Types.GET_BOOK_REQUEST]: getBookRequest,
   [Types.GET_BOOK_SUCCESS]: getBookSuccess,
   [Types.SELECT_BOOK]: selectBook,
+  [Types.ADD_BOOK_REQUEST]: addBookRequest,
+  [Types.ADD_BOOK_SUCCESS]: addBookSuccess,
 });

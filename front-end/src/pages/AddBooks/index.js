@@ -5,14 +5,15 @@ import { connect } from 'react-redux';
 
 import { Container, SignInContainer, SubmitContainer } from '../../styles/signStyle';
 import Button from '../../Components/Button';
-import { Creators as AuthActions } from '../../store/ducks/auth';
+import { Creators as BookActions } from '../../store/ducks/books';
 
 
 class AddBooks extends Component {
   state = {
     name: '',
     description: '',
-    stock: null,
+    stock: 0,
+    price: 0,
     img_url: '',
   }
 
@@ -23,16 +24,20 @@ class AddBooks extends Component {
   }
 
   handleSubmit = () => {
-    const { name, email, password } = this.state;
-    const { signUpRequest } = this.props;
+    const {
+      name, description, stock, price, img_url,
+    } = this.state;
+    const { addBookRequest, authToken } = this.props;
 
-    signUpRequest({
-      name, email, password, admin: false,
-    });
+    addBookRequest({
+      name, description, stock, price, img_url,
+    }, authToken);
   }
 
   render() {
-    const { name, email, password } = this.state;
+    const {
+      name, description, stock, price, img_url,
+    } = this.state;
     return (
       <Container>
         <h1>Add New Book</h1>
@@ -41,13 +46,16 @@ class AddBooks extends Component {
           <input name="name" onChange={this.handleInputChange} value={name} />
 
           <span>DESCRIPTION</span>
-          <input name="email" onChange={this.handleInputChange} value={email} />
+          <input name="description" onChange={this.handleInputChange} value={description} />
+
+          <span>PRICE</span>
+          <input name="price" onChange={this.handleInputChange} value={price} />
 
           <span>STOCK</span>
-          <input name="stock" onChange={this.handleInputChange} value={password} />
+          <input name="stock" onChange={this.handleInputChange} value={stock} />
 
           <span>IMAGE URL (leave empty if none)</span>
-          <input name="img_url" onChange={this.handleInputChange} value={password} />
+          <input name="img_url" onChange={this.handleInputChange} value={img_url} />
 
           <SubmitContainer>
             <Button type="button" onClick={this.handleSubmit}>Submit</Button>
@@ -59,6 +67,10 @@ class AddBooks extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(AuthActions, dispatch);
+const mapStateToProps = (state) => ({
+  authToken: state.auth.token,
+});
 
-export default connect(null, mapDispatchToProps)(AddBooks);
+const mapDispatchToProps = (dispatch) => bindActionCreators(BookActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddBooks);

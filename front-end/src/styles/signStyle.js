@@ -13,7 +13,6 @@ export const Container = styled.div`
 `;
 
 export const SignInContainer = styled.div`
-  height: 300px;
   width: 550px;
   background-color: #CCC;
   border-radius: 30px;
