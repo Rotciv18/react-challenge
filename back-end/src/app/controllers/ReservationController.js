@@ -1,5 +1,6 @@
 import Reservation from "../models/Reservation";
 import Book from "../models/Book";
+import User from "../models/User";
 
 class ReservationController {
   async store(req, res) {
@@ -31,7 +32,15 @@ class ReservationController {
 
   async index(req, res) {
     const reservations = await Reservation.findAll({
-      where: { user_id: req.userId }
+      where: { user_id: req.userId },
+      include: [
+        { model: User, as: "user", attributes: ["name", "email"] },
+        {
+          model: Book,
+          as: "book",
+          attributes: ["id", "name", "price", "img_url"]
+        }
+      ]
     });
 
     return res.json(reservations);

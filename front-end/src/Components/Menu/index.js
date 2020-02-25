@@ -15,7 +15,7 @@ export default function Menu() {
         <Button>My Rents</Button>
       </Link>
 
-      <Link to="/reserv" style={{ textDecoration: 'none' }}>
+      <Link to="/reservations" style={{ textDecoration: 'none' }}>
         <Button>Reservations</Button>
       </Link>
 

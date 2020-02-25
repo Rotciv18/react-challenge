@@ -36,7 +36,7 @@ routes.delete("/rent/:rentId", RentController.delete);
 
 routes.post("/reservation/:bookId", ReservationController.store);
 routes.delete("/reservation/:reservationId", ReservationController.delete);
-routes.get("reservation", ReservationController.index);
+routes.get("/reservation", ReservationController.index);
 
 routes.use(adminAuthMiddleware);
 
