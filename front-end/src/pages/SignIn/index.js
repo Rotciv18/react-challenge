@@ -20,11 +20,9 @@ class SignIn extends Component {
     const { auth } = this.props;
     console.log(auth);
 
-    { if (auth) {
-      if (auth.signed) {
-        history.push('/main');
-      }
-    } }
+     if (auth.signed) {
+      history.push('/main');
+    }
   }
 
   handleInputChange = (e) => {
