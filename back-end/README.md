@@ -4,10 +4,10 @@ Be sure to fill all the .env variables so the app can run properly. Please keep 
 Be also sure to have npm running properly on shell. yarn would be awesome. </br>
 
 #### Yarn
-To install all dependencies, run:
-$ yarn
-then, to start the application:
-$ yarn dev
+To install all dependencies, run: </br>
+$ yarn </br>
+then, to start the application: </br>
+$ yarn dev </br>
 The app should start properly on port 3333.
 #### npm
 Almost same for yarn: </br>
